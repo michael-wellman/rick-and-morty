@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import classes from "./MainNavigation.modules.scss";
 
 function MainNavigation() {
     return(
@@ -10,8 +11,8 @@ function MainNavigation() {
                     <span className="fas fa-bars open text-dark"></span>
                     <span className="fas fa-times close text-dark"></span>
                 </button>
-                <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                    <div class="navbar-nav fs-5">
+                <div className="collapse navbar-collapse justify-content-end" id="">
+                    <div className="navbar-nav fs-5">
                         <ul>
                             <li className="nav-link"><Link to='/'>Characters</Link></li>
                             <li className="nav-link"><Link to='/episodes'>Episodes</Link></li>
