@@ -8,6 +8,7 @@ import LocationPage from './pages/Location';
 import './App.css';
 
 function App() {
+
   return (
     <div>
       <Header />

@@ -6,9 +6,10 @@ function CardItem(props) {
         <div className="card">
              <div className="card-image">
                 <img src={props.image} alt={props.name} />
+                <span>{props.status}</span>
              </div>
              <div className="card-content">
-                <h3>{props.name}</h3>
+                <h3 className='fs-5 fw-bold mb-4'>{props.name}</h3>
                 <div className="location-details">
                     <p>
                     <span>Last Location</span><br/>
