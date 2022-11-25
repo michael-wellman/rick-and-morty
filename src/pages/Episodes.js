@@ -8,12 +8,13 @@ function Episodes() {
         getEpisodes();
     }, []);
 
-   async function getEpisodes() {
-    let url = 'https://rickandmortyapi.com/api/character/?page=1';
+   async function getEpisodes(selEpisode, defaultEpisode = 1) {
     let response = [];
+    
+    const episodeItem = selEpisode ? episodeItem : 1;
 
         try {
-            response = await fetch(url);
+            response = await fetch(`https://rickandmortyapi.com/api/episode/${episodeItem}`);
         } 
         catch (error) {
             console.log(error);
@@ -21,8 +22,26 @@ function Episodes() {
 
         const episodes = await response.json();
         updateEpisodes(episodes);
-        console.log(episodes);
+
+        episodes.characters && episodes.characters.map((character) => (
+            getCharacterInfo(character)
+           ))
+
         return episodes;
+    }
+
+    async function getCharacterInfo(characterAPI) {
+        let response = [];
+
+        try {
+            response = await fetch(characterAPI);
+        } catch (error) {
+            console.log(error)
+        }
+
+        const retCharacterDetails = await response.json();
+        console.log(retCharacterDetails);
+        return retCharacterDetails;
     }
 
     return(<section>
@@ -33,14 +52,15 @@ function Episodes() {
                 </div>
                 <div className="col-sm-10">
                 {
-                    episodes.results && episodes.results.filter((episode) => episode.episode === 'https://rickandmortyapi.com/api/episode/1').map(filteredEpisode => (
-                        <CardItem 
-                            name={filteredEpisode.name}
-                            image={filteredEpisode.image}
-                            location={filteredEpisode.location.name}
-                            status={filteredEpisode.status}
-                        />
-                    ))
+                    //** BELIEVE THIS IS WHERE MY ISH IS MESSING UP  */
+                    retCharacterDetails && retCharacterDetails.map(retCharacterDetail => (
+                    <CardItem 
+                        name={retCharacterDetail.name}
+                        image={retCharacterDetail.image}
+                        location={retCharacterDetail.location.name}
+                        status={retCharacterDetail.status}
+                    />
+                   ))
                 }
                 </div>
             </div>
