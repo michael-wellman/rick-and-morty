@@ -46,6 +46,7 @@ function Episodes() {
         filteredCharacterDetail(characterDetail);
         characterArray.push(characterDetail);
         console.log(characterDetail);
+        console.log(characterArray);
         return characterDetail;
     }
 
