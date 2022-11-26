@@ -30,6 +30,8 @@ function Episodes() {
         return episodes;
     }
 
+    let characterArray =[]; 
+
     async function getCharacterInfo(characterAPI) {
         let response = [];
         
@@ -42,6 +44,8 @@ function Episodes() {
 
         const characterDetail = await response.json();
         filteredCharacterDetail(characterDetail);
+        characterArray.push(characterDetail);
+        console.log(characterDetail);
         return characterDetail;
     }
 
@@ -54,7 +58,7 @@ function Episodes() {
                 <div className="col-9">
                     <div className="d-flex flex-wrap">
                         {
-                           characterDetail && characterDetail.map((char) => (
+                           characterArray.map((char) => (
                             <CardItem
                                 name={char.name}
                             />
