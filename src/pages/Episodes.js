@@ -3,6 +3,7 @@ import CardItem from '../components/cards/CardItem';
 
 function Episodes() {
     const [episodes, updateEpisodes] = useState([]);
+    const [characterDetail, filteredCharacterDetail] = useState([]);
 
     useEffect(() => {
         getEpisodes();
@@ -26,12 +27,12 @@ function Episodes() {
         episodes.characters && episodes.characters.map((character) => (
             getCharacterInfo(character)
            ))
-
         return episodes;
     }
 
     async function getCharacterInfo(characterAPI) {
         let response = [];
+        
 
         try {
             response = await fetch(characterAPI);
@@ -39,33 +40,31 @@ function Episodes() {
             console.log(error)
         }
 
-        const retCharacterDetails = await response.json();
-        console.log(retCharacterDetails);
-        return retCharacterDetails;
+        const characterDetail = await response.json();
+        filteredCharacterDetail(characterDetail);
+        return characterDetail;
     }
 
-    return(<section>
+    return (<main>
         <div className="container">
             <div className="row">
-                <div className="col-sm-2">
+                <div className="col-sm-3">
                     FILTER GOES HERE
                 </div>
-                <div className="col-sm-10">
-                {
-                    //** BELIEVE THIS IS WHERE MY ISH IS MESSING UP  */
-                    retCharacterDetails && retCharacterDetails.map(retCharacterDetail => (
-                    <CardItem 
-                        name={retCharacterDetail.name}
-                        image={retCharacterDetail.image}
-                        location={retCharacterDetail.location.name}
-                        status={retCharacterDetail.status}
-                    />
-                   ))
-                }
+                <div className="col-9">
+                    <div className="d-flex flex-wrap">
+                        {
+                           characterDetail && characterDetail.map((char) => (
+                            <CardItem
+                                name={char.name}
+                            />
+                           ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
     )
 }
 
