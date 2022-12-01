@@ -45,8 +45,6 @@ function Episodes() {
         const characterDetail = await response.json();
         filteredCharacterDetail(characterDetail);
         characterArray.push(characterDetail);
-        console.log(characterDetail);
-        console.log(characterArray);
         return characterDetail;
     }
 
